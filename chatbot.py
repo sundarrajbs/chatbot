@@ -1,34 +1,34 @@
 from langchain_xai import ChatXAI
-   from langchain.chains import ConversationChain
-   from langchain.memory import ConversationBufferMemory
-   from dotenv import load_dotenv
-   import os
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+from dotenv import load_dotenv
+import os
 
-   # Load environment variables from .env file
-   load_dotenv()
+ # Load environment variables from .env file
+load_dotenv()
 
-   # Initialize the xAI Grok model (requires XAI_API_KEY in .env)
-   llm = ChatXAI(model="grok-beta", temperature=0.7)
+# Initialize the xAI Grok model (requires XAI_API_KEY in .env)
+llm = ChatXAI(model="grok-beta", temperature=0.7)
 
-   # Set up conversation memory
-   memory = ConversationBufferMemory()
+# Set up conversation memory
+memory = ConversationBufferMemory()
 
-   # Create the conversation chain
-   conversation = ConversationChain(
-       llm=llm,
-       memory=memory,
-       verbose=True  # Set to False to disable verbose output
-   )
+# Create the conversation chain
+conversation = ConversationChain(
+   llm=llm,
+   memory=memory,
+   verbose=True  # Set to False to disable verbose output
+)
 
-   def start_chatbot():
-       print("Welcome to the LangChain Chatbot with Grok! Type 'exit' to quit.")
-       while True:
-           user_input = input("You: ")
-           if user_input.lower() == 'exit':
-               print("Goodbye!")
-               break
-           response = conversation.predict(input=user_input)
-           print(f"Bot: {response}")
+def start_chatbot():
+    print("Welcome to the LangChain Chatbot with Grok! Type 'exit' to quit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            print("Goodbye!")
+            break
+        response = conversation.predict(input=user_input)
+        print(f"Bot: {response}")
 
-   if __name__ == "__main__":
-       start_chatbot()
+if __name__ == "__main__":
+    start_chatbot()
